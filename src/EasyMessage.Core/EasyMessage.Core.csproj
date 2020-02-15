@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Company>Ievgen Pavlenko</Company>
+    <Authors>Ievgen Pavlenko</Authors>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <WarningLevel>1</WarningLevel>
     <DocumentationFile>..\EasyMessage.Core.xml</DocumentationFile>
