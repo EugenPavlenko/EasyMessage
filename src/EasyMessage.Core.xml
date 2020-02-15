@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyMessage.Core</name>
+    </assembly>
+    <members>
+        <member name="M:EasyMessage.Core.IDispatcher.DispatchIncomeMessage(EasyMessage.Core.Messages.IMessageEnvelope)">
+            <summary>
+            Dispatch incoming message.
+            </summary>
+            <param name="messageEnvelope">Income message Envelope</param>
+        </member>
+        <member name="T:EasyMessage.Core.IHandleMessage`1">
+            <summary>
+            Handles  messages.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+        </member>
+        <member name="M:EasyMessage.Core.IHandleMessage`1.HandleMessage(`0)">
+            <summary>
+            Handles should be quick, or delegate to a thread pool.
+            </summary>
+            <param name="message">Message to handle</param>
+        </member>
+        <member name="M:EasyMessage.Core.MessageDispatcher.DispatchIncomeMessage(EasyMessage.Core.Messages.IMessageEnvelope)">
+            <inheritdoc />
+        </member>
+        <member name="T:EasyMessage.Core.Messages.IMessage">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.IMessageEnvelope.Header">
+            <summary>
+            Envelop header
+            </summary>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.IMessageEnvelope.Message">
+            <summary>
+            Message in envelope
+            </summary>
+        </member>
+        <member name="M:EasyMessage.Core.Messages.IMessageEnveloper.Stuff(EasyMessage.Core.Messages.IMessage)">
+            <summary>
+            Wraps a IMessage into a IMessageEnvelope, populating header information.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.IMessageHeader.SenderId">
+            <summary>
+            Server Run ID of the message sender
+            </summary>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.IMessageHeader.MessageId">
+            <summary>
+            Unique identifier (per server run) of the message
+            </summary>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.MessageEnvelope.Header">
+            <inheritdoc cref="P:EasyMessage.Core.Messages.IMessageEnvelope.Header"/>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.MessageEnvelope.Message">
+            <inheritdoc cref="P:EasyMessage.Core.Messages.IMessageEnvelope.Message"/>
+        </member>
+        <member name="M:EasyMessage.Core.Messages.MessageEnveloperFactory.Stuff(EasyMessage.Core.Messages.IMessage)">
+            <inheritdoc cref="M:EasyMessage.Core.Messages.IMessageEnveloper.Stuff(EasyMessage.Core.Messages.IMessage)"/>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.MessageHeader.SenderId">
+            <inheritdoc cref="P:EasyMessage.Core.Messages.IMessageHeader.SenderId"/>
+        </member>
+        <member name="P:EasyMessage.Core.Messages.MessageHeader.MessageId">
+            <inheritdoc cref="P:EasyMessage.Core.Messages.IMessageHeader.MessageId"/>
+        </member>
+        <member name="T:EasyMessage.Core.Router.IRouter">
+            <summary>
+            Routes messages to registered handlers.
+            </summary>
+        </member>
+        <member name="M:EasyMessage.Core.Router.IRouter.Register(System.Object)">
+            <summary>
+            Registers an instance to its declared IHandleMessage types
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:EasyMessage.Core.Router.IRouter.UnRegister(System.Object)">
+            <summary>
+            UnRegister an instance to its declared IHandleMessage types
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:EasyMessage.Core.Router.IRouter.GetHandlers(EasyMessage.Core.Messages.IMessage)">
+            <summary>
+            Gets handlers for message
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyMessage.Core.Router.MessageRouter.Register(System.Object)">
+            <inheritdoc cref="M:EasyMessage.Core.Router.IRouter.Register(System.Object)"/>
+        </member>
+        <member name="M:EasyMessage.Core.Router.MessageRouter.UnRegister(System.Object)">
+            <inheritdoc cref="M:EasyMessage.Core.Router.IRouter.UnRegister(System.Object)"/>
+        </member>
+        <member name="M:EasyMessage.Core.Router.MessageRouter.GetHandlers(EasyMessage.Core.Messages.IMessage)">
+            <inheritdoc cref="M:EasyMessage.Core.Router.IRouter.GetHandlers(EasyMessage.Core.Messages.IMessage)"/>
+        </member>
+        <member name="M:EasyMessage.Core.Router.MessageRouter.CacheMessageType(System.Type)">
+            <summary>
+            Caches a message type and its parent type.
+            Must be called while cacheLock
+            </summary>
+        </member>
+        <member name="T:EasyMessage.Core.Router.MessageTypes">
+            <summary>
+            List of Message types
+            </summary>
+        </member>
+        <member name="P:EasyMessage.Core.Router.MessageTypes.MessageTypesList">
+            <summary>
+            Concrete types for IHandleMessage
+            </summary>
+        </member>
+        <member name="M:EasyMessage.Core.Utils.ReflectionUtils.FilterInterfacesForGenericType(System.Type,System.Type)">
+            <summary>
+            Recursively search a type to match generic interface base
+            </summary>
+            <param name="type">Type to search</param>
+            <param name="genericType">Match interfaces</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyMessage.Core.Utils.ReflectionUtils.FilterInterfacesForGenericType(System.Collections.Generic.IEnumerable{System.Type},System.Type)">
+            <summary>
+            Recursively search interfaces to match a generic interface base
+            </summary>
+            <param name="interfaces"></param>
+            <param name="genericType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyMessage.Core.Utils.ReflectionUtils.GetAllInterfaces(System.Type)">
+            <summary>
+            Gets all interfaces for type and its base types
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyMessage.Core.Utils.ReflectionUtils.IsContainInterface(System.Type,System.Type)">
+            <summary>
+            Determines whether the current type has the specified interface
+            </summary>
+            <param name="type"></param>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
